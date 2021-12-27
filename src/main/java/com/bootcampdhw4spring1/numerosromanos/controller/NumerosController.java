@@ -1,5 +1,6 @@
 package com.bootcampdhw4spring1.numerosromanos.controller;
 
+import com.bootcampdhw4spring1.numerosromanos.dto.PessoaDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,5 +36,29 @@ public class NumerosController {
         return "Seu numero é: " + decimal +
                 "\nO equivalente romano é: " + ans;
     }
+    // requisição:
+    // localhost:8080/Joao/Silva
+    @GetMapping("{nome}/{sobrenome}")
+    public PessoaDTO devolverPesssoa(@PathVariable String nome, @PathVariable String sobrenome) {
+         PessoaDTO pessoaDTO = new PessoaDTO(nome, sobrenome);
+         return pessoaDTO;
+    }
+    // resposta:
+//    {
+//        "nome": "Joao",
+//        "sobrenome": "Silva"
+//    }
 
+    // requisição:
+    // localhost:8080/PessoaDTO?nome=Joao&sobrenome=Silva
+    @GetMapping("PessoaDTO")
+    public PessoaDTO devolverPesssoaRequest(@RequestParam("nome") String nome, @RequestParam("sobrenome") String sobrenome) {
+        PessoaDTO pessoaDTO = new PessoaDTO(nome, sobrenome);
+        return pessoaDTO;
+    }
+    // resposta:
+//    {
+//        "nome": "Joao",
+//        "sobrenome": "Silva"
+//    }
 }
